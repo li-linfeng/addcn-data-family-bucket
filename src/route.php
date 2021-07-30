@@ -1,7 +1,5 @@
 <?php
 
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('/_test', function () {
-    return 'Hello World';
+Route::prefix('api')->group(function () {
+    Route::get('/stats', function () {
+        return [
+            'message' => 'success',
+            'data' => []
+        ];
+    });
 });
