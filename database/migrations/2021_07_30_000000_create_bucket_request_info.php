@@ -21,8 +21,8 @@ class CreateBucketRequestInfo extends Migration
             $table->string('fullUrl')->default(' ');
             $table->string('api')->default(' ');
             $table->string('method', 10)->default(' ');
-            $table->timestamp('timeIn')->default(' ');
-            $table->timestamp('timeOut')->default(' ');
+            $table->timestamp('timeIn')->nullable();
+            $table->timestamp('timeOut')->nullable();
             $table->smallInteger('timeUsed')->default(0);
             $table->json('response')->nullable();
         });
