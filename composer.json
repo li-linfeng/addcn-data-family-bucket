@@ -1,0 +1,22 @@
+{
+    "name": "addcn/data-family-bucket",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Bucket\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.3|^8.0",
+        "laravel/framework": "^8.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bucket\\FamilyBucketProvider"
+            ]
+        }
+    },
+}
