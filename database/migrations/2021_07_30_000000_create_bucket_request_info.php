@@ -13,11 +13,11 @@ class CreateBucketRequestInfo extends Migration
      */
     public function up()
     {
-        Schema->create('bucket_request_info', function (Blueprint $table) {
+        Schema::create('bucket_request_info', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ip',30)->default(' ');
+            $table->string('ip', 30)->default(' ');
             $table->string('imei')->default(' ');
-            $table->string('client',10)->default(' ');
+            $table->string('client', 10)->default(' ');
             $table->string('fullUrl')->default(' ');
             $table->string('api')->default(' ');
             $table->string('method', 10)->default(' ');
