@@ -19,15 +19,15 @@ class FamilyBucketProvider  extends  ServiceProvider
             $this->registerMigrations();
 
             $this->publishes([
-                __DIR__ . '/../database/migrations' => database_path('migrations'),
+                __DIR__ . '/database/migrations' => database_path('migrations'),
             ], 'bucket-migrations');
 
             $this->publishes([
-                __DIR__ . '/../config/bucket.php' => config_path('bucket.php'),
+                __DIR__ . '/config/bucket.php' => config_path('bucket.php'),
             ], 'bucket-config');
         }
 
-        $this->loadRoutesFrom(__DIR__ . '/../route.php');
+        $this->loadRoutesFrom(__DIR__ . '/route.php');
     }
 
     /**
@@ -37,6 +37,6 @@ class FamilyBucketProvider  extends  ServiceProvider
      */
     protected function registerMigrations()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
     }
 }
