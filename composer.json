@@ -1,5 +1,6 @@
 {
     "name": "addcn/data-family-bucket",
+    "description": "This package used to collect the request info for the project",
     "type": "library",
     "license": "MIT",
     "minimum-stability": "dev",
@@ -18,5 +19,5 @@
                 "Bucket\\FamilyBucketProvider"
             ]
         }
-    },
+    }
 }
