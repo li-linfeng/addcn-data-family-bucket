@@ -25,6 +25,11 @@ class CreateBucketRequestInfo extends Migration
             $table->timestamp('timeOut')->nullable();
             $table->smallInteger('timeUsed')->default(0);
             $table->json('response')->nullable();
+            $table->json('params')->nullable();
+            $table->index(['imei']);
+            $table->index(['fullUrl']);
+            $table->index(['timeUsed']);
+            $table->index(['api']);
         });
     }
 

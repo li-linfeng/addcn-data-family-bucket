@@ -4,6 +4,8 @@ namespace Bucket;
 
 use Bucket\Models\BucketRequest;
 
+use Closure;
+
 class GetAllUrlInfo
 {
     /**
@@ -22,28 +24,30 @@ class GetAllUrlInfo
         //判断是否需要进行拦截分析
         $uri = $request->getUri();
 
-        if (!in_array($uri, config('bucket.exceptUri'))) {
+        if (in_array($uri, config('bucket.exceptUri'))) {
             return;
         }
-
-        $this->createRequestInfo($request);
+        $this->createRequestInfo($request, $response);
     }
 
-    protected function createRequestInfo($request)
+    protected function createRequestInfo($request, $response)
     {
         $endTime = microtime(true);
+        $response = json_encode(json_decode($response->getContent()), JSON_UNESCAPED_UNICODE);
         $params = [
             'imei' => $this->getImei($request),
             'ip'   => $request->ip(),
-            'client' => 'ios',
+            'client' => CLIENT,
             'fullUrl' => $request->getUri(),
             'api' => $request->getPathInfo(),
             'method' => $request->getMethod(),
             'timeIn' => date('Y-m-d H:i:s', LARAVEL_START),
             'timeOut' => date('Y-m-d H:i:s', $endTime),
-            'timeUsed' => $endTime - LARAVEL_START,
-            'response' => json_encode(json_decode($response->getContent()), JSON_UNESCAPED_UNICODE)
+            'timeUsed' => ($endTime - LARAVEL_START) * 1000,
+            'response' => $response,
+            'params' => json_encode($request->all(), JSON_UNESCAPED_UNICODE)
         ];
+
         BucketRequest::create($params);
     }
 
@@ -51,13 +55,18 @@ class GetAllUrlInfo
 
     protected  function getImei($request)
     {
-
         $userAgent = $request->userAgent();
-
         $imeiKey = config('bucket.imei');
-
         $imei = $request->header($imeiKey) ?: $userAgent[$imeiKey];
 
+        return $imei;
+    }
+
+    protected  function getParams($request)
+    {
+        $userAgent = $request->userAgent();
+        $imeiKey = config('bucket.imei');
+        $imei = $request->header($imeiKey) ?: $userAgent[$imeiKey];
         return $imei;
     }
 }
