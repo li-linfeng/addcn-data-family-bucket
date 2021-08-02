@@ -45,7 +45,8 @@ class GetAllUrlInfo
             'timeOut' => date('Y-m-d H:i:s', $endTime),
             'timeUsed' => ($endTime - LARAVEL_START) * 1000,
             'response' => $response,
-            'params' => json_encode($request->all(), JSON_UNESCAPED_UNICODE)
+            'params' => json_encode($request->all(), JSON_UNESCAPED_UNICODE),
+            'client_time' => $request->input('request_time')
         ];
 
         BucketRequest::create($params);
