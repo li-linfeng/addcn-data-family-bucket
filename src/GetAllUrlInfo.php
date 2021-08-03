@@ -41,7 +41,7 @@ class GetAllUrlInfo
             return false;
         }
 
-        if (!in_array($url, config('bucket.need_record_uri'))) {
+        if (config('bucket.need_record_uri') && !in_array($url, config('bucket.need_record_uri'))) {
             return false;
         }
 
