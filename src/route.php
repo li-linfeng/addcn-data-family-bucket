@@ -20,11 +20,17 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::prefix('api')->group(function () {
-    Route::get('/stats', function () {
-        return [
-            'message' => 'success',
-            'data' => []
-        ];
-    });
-});
+Route::group(
+    [
+        'prefix' => 'api',
+        'middleware' => ['api']
+    ],
+    function () {
+        Route::get('/stats', function () {
+            return [
+                'message' => 'success',
+                'data' => []
+            ];
+        });
+    }
+);
