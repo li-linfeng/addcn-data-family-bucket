@@ -22,12 +22,33 @@ class GetAllUrlInfo
     public function terminate($request, $response)
     {
         //判断是否需要进行拦截分析
-        $uri = $request->getUri();
-
-        if (in_array($uri, config('bucket.exceptUri'))) {
+        if (!$this->shouldRecord($request)) {
             return;
-        }
+        };
         $this->createRequestInfo($request, $response);
+    }
+
+
+    protected function shouldRecord($request)
+    {
+        $url = $request->getUri();
+
+        if (in_array($url, config('bucket.except_uri'))) {
+            return false;
+        }
+
+        if (preg_match(config('bucket.except_pattern'), $url)) {
+            return false;
+        }
+
+        if (!in_array($url, config('bucket.need_record_uri'))) {
+            return false;
+        }
+
+        if (!preg_match(config('bucket.need_record_pattern'), $url)) {
+            return false;
+        }
+        return true;
     }
 
     protected function createRequestInfo($request, $response)

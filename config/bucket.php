@@ -1,12 +1,12 @@
 <?php
 
-$exceptUri = [
-
-];
-
+$except_uri = [];
+$need_record_uri = [];
 
 return [
-    'exceptUri' =>$exceptUri,           // 需要记录的uri
-
-    'imei' => 'bucket-uuid'             //  header中记录imei的字段
+    'except_uri' => $exceptUri,                  // 不需要记录的uri
+    'except_pattern' => '',                    // 不需要積累的url的正則表達式
+    'need_record_uri' => $need_record_uri,    // 不需要積累的url的正則表達式
+    'need_record_pattern' => '',             // 不需要積累的url的正則表達式
+    'imei' => ''                            //  header中记录 imei 的字段
 ];
