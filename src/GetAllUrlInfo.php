@@ -56,18 +56,11 @@ class GetAllUrlInfo
 
     protected  function getImei($request)
     {
-        $userAgent = $request->userAgent();
-        $imeiKey = config('bucket.imei');
-        $imei = $request->header($imeiKey) ?: $userAgent[$imeiKey];
+        // $userAgent = $request->userAgent();
+        // $imeiKey = config('bucket.imei');
+        // $imei = $request->header($imeiKey) ?: $userAgent[$imeiKey];
 
-        return $imei;
-    }
-
-    protected  function getParams($request)
-    {
-        $userAgent = $request->userAgent();
-        $imeiKey = config('bucket.imei');
-        $imei = $request->header($imeiKey) ?: $userAgent[$imeiKey];
-        return $imei;
+        // return $imei;
+        return IMEI;
     }
 }
