@@ -26,7 +26,17 @@ Route::group(
         'middleware' => ['api']
     ],
     function () {
+        //"start_page": 要去的頁面  
+        //"end_page": ": 要關閉的頁面  
         Route::get('/stats', function () {
+            return [
+                'message' => 'success',
+                'data' => []
+            ];
+        });
+
+        //"flag": launch首次打開   close 關閉   reverse 從後台回復到前台  
+        Route::get('/app_life_cycle', function () {
             return [
                 'message' => 'success',
                 'data' => []
