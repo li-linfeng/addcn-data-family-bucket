@@ -27,6 +27,7 @@ class CreateBucketRequestInfo extends Migration
             $table->json('response')->nullable();
             $table->json('params')->nullable();
             $table->timestamp('request_time')->nullable();
+            $table->string('route_name')->default(' ')->comment('路由的name');
             $table->index(['imei']);
             $table->index(['fullUrl']);
             $table->index(['timeUsed']);

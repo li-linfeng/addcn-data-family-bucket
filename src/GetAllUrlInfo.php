@@ -56,18 +56,19 @@ class GetAllUrlInfo
         $endTime = microtime(true);
         $response = json_encode(json_decode($response->getContent()), JSON_UNESCAPED_UNICODE);
         $params = [
-            'imei' => $this->getImei($request),
-            'ip'   => $request->ip(),
-            'client' => CLIENT,
-            'fullUrl' => $request->getUri(),
-            'api' => $request->getPathInfo(),
-            'method' => $request->getMethod(),
-            'timeIn' => date('Y-m-d H:i:s', LARAVEL_START),
-            'timeOut' => date('Y-m-d H:i:s', $endTime),
-            'timeUsed' => ($endTime - LARAVEL_START) * 1000,
-            'response' => $response,
-            'params' => json_encode($request->all(), JSON_UNESCAPED_UNICODE),
-            'request_time' => $request->header('client_time')
+            'imei'         => $this->getImei($request),
+            'ip'           => $request->ip(),
+            'client'       => CLIENT,
+            'fullUrl'      => $request->getUri(),
+            'api'          => $request->getPathInfo(),
+            'method'       => $request->getMethod(),
+            'timeIn'       => date('Y-m-d H:i:s', LARAVEL_START),
+            'timeOut'      => date('Y-m-d H:i:s', $endTime),
+            'timeUsed'     => ($endTime - LARAVEL_START) * 1000,
+            'response'     => $response,
+            'params'       => json_encode($request->all(), JSON_UNESCAPED_UNICODE),
+            'request_time' => $request->header('client_time'),
+            'route_name'   => $request->route()->getName()
         ];
 
         BucketRequest::create($params);
