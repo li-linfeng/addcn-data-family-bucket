@@ -15,13 +15,8 @@ class CreateBucketUserLabelInfo extends Migration
     {
         Schema::create('bucket_user_label_info', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->json('style');
-            $table->json('region');
-            $table->json('budget');
-            $table->string('most_like_style');
-            $table->string('most_like_region');
-            $table->string('most_like_budget');
+            $table->string('imei');
+            $table->json('most_like_article_keywords');
             $table->timestamps();
         });
     }
