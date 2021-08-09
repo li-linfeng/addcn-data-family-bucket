@@ -4,34 +4,29 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBucketRequestInfo extends Migration
+class CreateBucketUserLabelInfo extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * 
      * @return void
      */
     public function up()
     {
-        Schema::create('bucket_request_info', function (Blueprint $table) {
+        Schema::create('bucket_user_label_info', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ip', 30)->default(' ');
-            $table->string('imei')->default(' ');
-            $table->string('client', 10)->default(' ');
-            $table->string('fullUrl')->default(' ');
-            $table->string('api')->default(' ');
-            $table->string('method', 10)->default(' ');
-            $table->timestamp('timeIn')->nullable();
-            $table->timestamp('timeOut')->nullable();
-            $table->smallInteger('timeUsed')->default(0);
-            $table->json('response')->nullable();
-            $table->json('params')->nullable();
-            $table->timestamp('request_time')->nullable();
-            $table->string('route_name')->default(' ')->comment('路由的name');
-            $table->index(['imei']);
-            $table->index(['fullUrl']);
-            $table->index(['timeUsed']);
-            $table->index(['api']);
+            $table->string('imei');
+            $table->json('most_like_article_keywords');
+            $table->timestamps();
+        });
+
+        Schema::create('bucket_user_system_analyze', function (Blueprint $table) {
+            $table->increments('id');
+            $table->date('date');
+            $table->integer('increment_num')->comment('每日新增用户数');
+            $table->integer('active_num')->comment('每日活跃用户数');
+            $table->integer('app_total_use_time')->comment('每日app打开时长,ms为单位');
+            $table->timestamps();
         });
     }
 
@@ -42,6 +37,7 @@ class CreateBucketRequestInfo extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bucket_request_info');
+        Schema::dropIfExists('bucket_user_label_info');
+        Schema::dropIfExists('bucket_user_system_analyze');
     }
 }
